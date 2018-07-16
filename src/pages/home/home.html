@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar color="secondary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Todo</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (tap)="logout()"><ion-icon name="log-out"></ion-icon></button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <form padding (submit)="addTask(newTask)" #f="ngForm">
+      <ion-list>
+        <ion-item>
+          <ion-label floating>タスク</ion-label>
+          <ion-input type="text" [(ngModel)]="newTask.name" name="task" required minlength="3" maxlength="20"></ion-input>
+        </ion-item>
+      </ion-list>
+      <button ion-button block type="submit" [disabled]="!f.form.valid">追加</button>
+    </form>
+  
+    <ion-list>
+      <ion-item *ngFor="let task of tasks; let i = index" (tap)="changeTask(i, task.key)">{{task.name}}</ion-item>
+    </ion-list>
+  </ion-content>
